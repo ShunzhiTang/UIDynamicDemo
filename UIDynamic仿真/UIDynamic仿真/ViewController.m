@@ -10,9 +10,15 @@
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *fristLabel;
+@property (weak, nonatomic) IBOutlet UIView *nextView;
+
+
 
 //设置一个全局的物理仿真器
 @property (nonatomic ,strong)UIDynamicAnimator *animator;
+
+//捕捉行为
+@property (nonatomic , strong)UISnapBehavior *snap;
 
 @end
 
@@ -34,12 +40,47 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    //重力行为
+//    [self gravityBehaviour];
     
-    [self gravityBehaviour];
+    //碰撞 + 重力
+    [self collisionAndGravity];
 }
+
+#pragma mark 碰撞 + 重力
+- (void)collisionAndGravity{
+    //2、创建仿真行为
+    
+    UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:@[self.fristLabel]];
+    
+    //设置向量
+    gravity.gravityDirection = CGVectorMake(5, 1);
+    
+    gravity.angle = M_PI_2;
+    
+    //3、碰撞行为
+    
+    UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[self.fristLabel, self.nextView]];
+    
+    //变化范围
+//    CGPoint fromPoint = CGPointMake(0, [UIScreen mainScreen].bounds.size.height * 0);
+//         CGPoint toPoint = CGPointMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * 1.0);
+//    
+//    [collision addBoundaryWithIdentifier:@"collision" fromPoint:fromPoint toPoint:toPoint];
+    //设置边界
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    
+    [collision addBoundaryWithIdentifier:@"collision" forPath:bezierPath];
+    
+    //添加
+    [self.animator addBehavior:gravity];
+    [self.animator addBehavior:collision];
+}
+
+
 #pragma mark 实现重力行为
 - (void)gravityBehaviour{
-    
+
     //1、创建一个物理仿真器（顺便设置仿真范围）
     
     //2、创建相应的物理仿真行为

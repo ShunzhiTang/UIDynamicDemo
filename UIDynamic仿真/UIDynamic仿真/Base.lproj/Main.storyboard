@@ -24,17 +24,28 @@
                                     <constraint firstAttribute="height" constant="100" id="kmn-DY-6Bx"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gh5-LB-nQB">
+                                <rect key="frame" x="140" y="302" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.99742907290000005" green="0.26148577039999998" blue="0.77746387299999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Ucu-ar-8Qe"/>
+                                    <constraint firstAttribute="width" constant="50" id="adz-H7-Gx7"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Gh5-LB-nQB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="140" id="AaM-nn-jqA"/>
                             <constraint firstItem="Hl8-XS-2d7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="79" id="WS1-79-Jmh"/>
                             <constraint firstItem="Hl8-XS-2d7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="123" id="iiV-9E-Hlc"/>
+                            <constraint firstItem="Gh5-LB-nQB" firstAttribute="top" secondItem="Hl8-XS-2d7" secondAttribute="bottom" constant="103" id="rGW-L9-Vhs"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="fristLabel" destination="Hl8-XS-2d7" id="45m-9s-MBc"/>
+                        <outlet property="nextView" destination="Gh5-LB-nQB" id="cgg-G3-P0R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
