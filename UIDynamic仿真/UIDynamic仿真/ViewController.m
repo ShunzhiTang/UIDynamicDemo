@@ -44,7 +44,21 @@
 //    [self gravityBehaviour];
     
     //碰撞 + 重力
-    [self collisionAndGravity];
+//    [self collisionAndGravity];
+    
+    if(self.snap == nil){
+        CGPoint point = [[touches anyObject] locationInView:self.view];
+        
+        self.snap = [[UISnapBehavior alloc] initWithItem:self.fristLabel snapToPoint:point];
+        
+        //设置减震效果
+        self.snap.damping = 0.5;
+        
+        //添加
+        [self.animator addBehavior:self.snap];
+    }
+    
+    
 }
 
 #pragma mark 碰撞 + 重力
@@ -65,7 +79,6 @@
     //变化范围
 //    CGPoint fromPoint = CGPointMake(0, [UIScreen mainScreen].bounds.size.height * 0);
 //         CGPoint toPoint = CGPointMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * 1.0);
-//    
 //    [collision addBoundaryWithIdentifier:@"collision" fromPoint:fromPoint toPoint:toPoint];
     //设置边界
     UIBezierPath *bezierPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0,[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
